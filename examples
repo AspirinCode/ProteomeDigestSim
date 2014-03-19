@@ -1,0 +1,169 @@
+#### 		create [R] object of class "proteome"
+setClass("proteome",representation(fasta="list", AAratios="matrix",seq="list",names="ANY",cleaved="list",coverage="ANY",coveragevec="ANY",summary="ANY"))
+
+######  	read in your favorite proteome
+###  anyName<-read.proteome(input="[path to your favoritefasta file]")
+paste(getwd(),"/Scervis.fasta",sep="")
+Scerevis<-read.proteome(input=paste(getwd(),"/Scervis.fasta",sep=""),pie=TRUE,cleave=F)
+
+
+#### 		MED-FASP simulation - see function details for options
+####		LysC only
+lysC<-medfasp(object=cere,proteases=c("lysC"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+
+#### 		trypsin only	
+try<-medfasp(object=cere,proteases=c("trypsin"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		gluC only	
+gluC<-medfasp(object=cere,proteases=c("gluC"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		argC only	
+argC<-medfasp(object=cere,proteases=c("argC"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		aspN only	
+aspN<-medfasp(object=cere,proteases=c("aspN"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		CNBr only	
+CNBr<-medfasp(object=cere,proteases=c("CNBr"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		NTCB only	
+NTCB<-medfasp(object=cere,proteases=c("NTCB"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		TrpC only	
+TrpC<-medfasp(object=cere,proteases=c("trpC"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		lysc then trypsin	
+lysCtryp<-medfasp(object=cere,proteases=c("lysC","trypsin"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		gluc then trypsin	
+gluC_tryp<-medfasp(object=cere,proteases=c("gluC","trypsin"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		CNBr then lysc then trypsin	
+cnbr_lysC_tryp<-medfasp(object=cere,proteases=c("CNBr","lysC","trypsin"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+#### 		NTCB then CNBr then lysc then trypsin	
+ntcb_cnbr_lysC_tryp<-medfasp(object=cere,proteases=c("NTCB","CNBr","lysC","trypsin"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+####		TrpC, NTCB, CNBr, ArgC, GluC, Trypsin
+trpC_NTCB_CNBr_ArgC_GluC_trypsin<-medfasp(object=cere,proteases=c("trpC","NTCB","CNBr","argC","gluC","trypsin"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+####		TrpC, NTCB, CNBr, ArgC, AspN, GluC, Trypsin
+trpC_NTCB_CNBr_ArgC_AspN_GluC_trypsin<-medfasp(object=cere,proteases=c("trpC","NTCB","CNBr","argC","aspN","gluC","trypsin"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+####		Trypsin, GluC, AspN, ArgC, CNBr, NTCB, TrpC (reverse)
+reverse<-medfasp(object=cere,missed.propensity=c(0.02),proteases=c("trypsin","gluC","aspN","argC","CNBr","NTCB","trpC"),LENcutoff=c(7,35),MWcutoff=5000,filterMW=TRUE,filterLEN=FALSE)
+
+
+
+#####################################################################################################
+####		Example of using cut predict with missed cleavages
+####		These lines of code were used to produce supplemental figure 1
+
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n1
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n2
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n3
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n4
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n5
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n6
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n7
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n8
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n9
+cut.predict.test(object=pom, missed.propensity=0.01)->testmissed0pt01n10
+
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n1
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n2
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n3
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n4
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n5
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n6
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n7
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n8
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n9
+cut.predict.test(object=pom, missed.propensity=0.1)->testmissed0pt1n10
+
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n1
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n2
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n3
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n4
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n5
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n6
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n7
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n8
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n9
+cut.predict.test(object=pom, missed.propensity=0.5)->testmissed0pt5n10
+
+hist(nchar(testmissed0pt01n1@cleaved$protease),breaks=c(0:10000))->hist11
+hist(nchar(testmissed0pt01n2@cleaved$protease),breaks=c(0:10000))->hist12
+hist(nchar(testmissed0pt01n3@cleaved$protease),breaks=c(0:10000))->hist13
+hist(nchar(testmissed0pt01n4@cleaved$protease),breaks=c(0:10000))->hist14
+hist(nchar(testmissed0pt01n5@cleaved$protease),breaks=c(0:10000))->hist15
+hist(nchar(testmissed0pt01n6@cleaved$protease),breaks=c(0:10000))->hist16
+hist(nchar(testmissed0pt01n7@cleaved$protease),breaks=c(0:10000))->hist17
+hist(nchar(testmissed0pt01n8@cleaved$protease),breaks=c(0:10000))->hist18
+hist(nchar(testmissed0pt01n9@cleaved$protease),breaks=c(0:10000))->hist19
+hist(nchar(testmissed0pt01n10@cleaved$protease),breaks=c(0:10000))->hist110
+
+hist(nchar(testmissed0pt1n1@cleaved$protease),breaks=c(0:10000))->hist21
+hist(nchar(testmissed0pt1n2@cleaved$protease),breaks=c(0:10000))->hist22
+hist(nchar(testmissed0pt1n3@cleaved$protease),breaks=c(0:10000))->hist23
+hist(nchar(testmissed0pt1n4@cleaved$protease),breaks=c(0:10000))->hist24
+hist(nchar(testmissed0pt1n5@cleaved$protease),breaks=c(0:10000))->hist25
+hist(nchar(testmissed0pt1n6@cleaved$protease),breaks=c(0:10000))->hist26
+hist(nchar(testmissed0pt1n7@cleaved$protease),breaks=c(0:10000))->hist27
+hist(nchar(testmissed0pt1n8@cleaved$protease),breaks=c(0:10000))->hist28
+hist(nchar(testmissed0pt1n9@cleaved$protease),breaks=c(0:10000))->hist29
+hist(nchar(testmissed0pt1n10@cleaved$protease),breaks=c(0:10000))->hist210
+
+hist(nchar(testmissed0pt5n1@cleaved$protease),breaks=c(0:10000))->hist31
+hist(nchar(testmissed0pt5n2@cleaved$protease),breaks=c(0:10000))->hist32
+hist(nchar(testmissed0pt5n3@cleaved$protease),breaks=c(0:10000))->hist33
+hist(nchar(testmissed0pt5n4@cleaved$protease),breaks=c(0:10000))->hist34
+hist(nchar(testmissed0pt5n5@cleaved$protease),breaks=c(0:10000))->hist35
+hist(nchar(testmissed0pt5n6@cleaved$protease),breaks=c(0:10000))->hist36
+hist(nchar(testmissed0pt5n7@cleaved$protease),breaks=c(0:10000))->hist37
+hist(nchar(testmissed0pt5n8@cleaved$protease),breaks=c(0:10000))->hist38
+hist(nchar(testmissed0pt5n9@cleaved$protease),breaks=c(0:10000))->hist39
+hist(nchar(testmissed0pt5n10@cleaved$protease),breaks=c(0:10000))->hist310
+
+
+postscript(file="suppFig1.ps",width=8, height=6)
+par(cex=1.5)
+plot(hist11$density, xlim=c(5,40),ylim=c(0.0,0.05),type="l", ylab="fraction of all peptides produced", xlab="length",main="comparison of missed cleavage propensities, n=10")
+lines(hist12$density, col="black")
+lines(hist13$density, col="black")
+lines(hist14$density, col="black")
+lines(hist15$density, col="black")
+lines(hist16$density, col="black")
+lines(hist17$density, col="black")
+lines(hist18$density, col="black")
+lines(hist19$density, col="black")
+lines(hist110$density, col="black")
+
+lines(hist21$density, col="red")
+lines(hist22$density, col="red")
+lines(hist23$density, col="red")
+lines(hist24$density, col="red")
+lines(hist25$density, col="red")
+lines(hist26$density, col="red")
+lines(hist27$density, col="red")
+lines(hist28$density, col="red")
+lines(hist29$density, col="red")
+lines(hist210$density, col="red")
+
+lines(hist31$density, col="blue")
+lines(hist32$density, col="blue")
+lines(hist33$density, col="blue")
+lines(hist34$density, col="blue")
+lines(hist35$density, col="blue")
+lines(hist36$density, col="blue")
+lines(hist37$density, col="blue")
+lines(hist38$density, col="blue")
+lines(hist39$density, col="blue")
+lines(hist310$density, col="blue")
+legend(x=25, y=0.04,legend=c("1% missed","10% missed", "50% missed"), lty=c(1,1,1),col=c("black","red","blue"))
+dev.off()
+
+
+
+
