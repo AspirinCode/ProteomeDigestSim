@@ -11,7 +11,7 @@
 ###	FIXED: the loop when term=0 needs to start on 2 instead of 1
 ###  	added a propensity for missed cleavage
 
-cut.predict.test=function(object=spombe,residues=c("D"),term=c(0),protease="AspN",add=FALSE, missed.propensity=0.01){
+cut.predict=function(object=spombe,residues=c("D"),term=c(0),protease="AspN",add=FALSE, missed.propensity=0.01){
 	###	testing the cleavage n-terminal to residues[1]
 	#########
 	proteins.l<-length(object@fasta)
